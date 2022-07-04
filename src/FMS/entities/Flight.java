@@ -36,12 +36,12 @@ public abstract class Flight implements Comparable<Flight> {
 		this.arrival = new DateTime(f.arrival);
 		this.vessel = new Aircraft(f.vessel);
 
-		Set<Staff> staff = new HashSet<>();
-		for(Staff s : staff){
-			staff.add(new Staff(s));
+		Set<Staff> crew = new HashSet<>();
+		for(Staff s : f.crew){
+			crew.add(new Staff(s));
 		}
 		Set<Passenger> passengers = new HashSet<>();
-		for(Passenger p : passengers){
+		for(Passenger p : f.passengers){
 			passengers.add(new Passenger(p));
 		}
 	}
@@ -101,7 +101,8 @@ public abstract class Flight implements Comparable<Flight> {
 		}
 	}
 	public boolean add(Passenger passenger){
-		if(!passengers.contains(passenger) && (vessel.getCapactiy() == 0 || vessel.getCapactiy() >= passengers.size())){
+
+		if(!passengers.contains(passenger) && (vessel == null || vessel.getCapactiy() >= passengers.size())){
 			passengers.add(passenger);
 			return true;
 		}else {

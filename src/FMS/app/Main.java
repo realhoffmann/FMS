@@ -16,6 +16,19 @@ public class Main {
 
 
 	public static void main(String[] args) {
+		List<Flight> flights = init();
+		print(flights);
+
+		Collections.sort(flights);
+		print(flights);
+
+		List<Flight> viennaFlights = filter(flights, new OriginMatcher("VIE"));
+		print(viennaFlights);
+
+		viennaFlights.sort(new DepartureComparator());
+		print(viennaFlights);
+
+		export(viennaFlights, "departures_VIE.txt");
 
 	}
 	private static int export(java.util.List<Flight> flights, String filename){
